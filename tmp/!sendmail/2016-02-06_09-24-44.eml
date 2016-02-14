@@ -1,0 +1,124 @@
+X-Sendmail-Cmdline: sendmail.pl -t -i
+To: test@test.ua
+Subject: =?UTF-8?B?RmF2b3JpdGUgRHJlc3NlcyAtINC30LDQutCw0LcgMQ==?=
+X-PHP-Originating-Script: 0:mail.php
+MIME-Version: 1.0
+Date: Sat, 06 Feb 2016 09:24:43 +0200
+From: =?UTF-8?B?RmF2b3JpdGUgRHJlc3Nlcw==?=<samo.yuriy@ygmail.com>
+Reply-To: =?UTF-8?B?RmF2b3JpdGUgRHJlc3Nlcw==?=<samo.yuriy@ygmail.com>
+Return-Path: samo.yuriy@ygmail.com
+X-Mailer: PHP/5.3.13
+Content-Type: multipart/related; boundary="----=_NextPart_e50097e42dc83fadc107b5e4f9c9d9c0"
+
+------=_NextPart_e50097e42dc83fadc107b5e4f9c9d9c0
+Content-Type: multipart/alternative; boundary="----=_NextPart_e50097e42dc83fadc107b5e4f9c9d9c0_alt"
+
+------=_NextPart_e50097e42dc83fadc107b5e4f9c9d9c0_alt
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+Благодарим за интерес к товарам Favorite Dresses. Ваш заказ получен и поступит в обработку после подтверждения оплаты.
+
+№ заказа: 1
+Дата заказа: 06.02.2016
+Состояние заказа: Ожидание
+
+Товары:
+1x iPhone (Товар 11) 101.00 р.
+
+Заказ итого:
+Сумма: 101.00 р.
+Фиксированная стоимость доставки: 5.00 р.
+Итого: 106.00 р.
+
+Если у Вас есть какие-либо вопросы, ответьте на это сообщение.
+
+
+------=_NextPart_e50097e42dc83fadc107b5e4f9c9d9c0_alt
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Favorite Dresses - заказ 1</title>
+</head>
+<body style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #000000;">
+<div style="width: 680px;"><a href="http://localhost/shop.com/" title="Favorite Dresses"><img src="http://localhost/shop.com/image/data/cooltext163799705735436.png" alt="Favorite Dresses" style="margin-bottom: 20px; border: none;" /></a>
+  <p style="margin-top: 0px; margin-bottom: 20px;">Благодарим за интерес к товарам Favorite Dresses. Ваш заказ получен и поступит в обработку после подтверждения оплаты.</p>
+      <table style="border-collapse: collapse; width: 100%; border-top: 1px solid #DDDDDD; border-left: 1px solid #DDDDDD; margin-bottom: 20px;">
+    <thead>
+      <tr>
+        <td style="font-size: 12px; border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; background-color: #EFEFEF; font-weight: bold; text-align: left; padding: 7px; color: #222222;" colspan="2">Детализация заказа</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;"><b>№ заказа:</b> 1<br />
+          <b>Дата заказа:</b> 06.02.2016<br />
+          <b>Способ оплаты:</b> Оплата при доставке<br />
+                    <b>Способ доставки:</b> Фиксированная стоимость доставки          </td>
+        <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;"><b>E-Mail:</b> test@test.ua<br />
+          <b>Телефон:</b> 3456789<br />
+          <b>IP адрес:</b> 127.0.0.1<br /></td>
+      </tr>
+    </tbody>
+  </table>
+    <table style="border-collapse: collapse; width: 100%; border-top: 1px solid #DDDDDD; border-left: 1px solid #DDDDDD; margin-bottom: 20px;">
+    <thead>
+      <tr>
+        <td style="font-size: 12px; border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; background-color: #EFEFEF; font-weight: bold; text-align: left; padding: 7px; color: #222222;">Адрес плательщика</td>
+                <td style="font-size: 12px; border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; background-color: #EFEFEF; font-weight: bold; text-align: left; padding: 7px; color: #222222;">Адрес доставки</td>
+              </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;">Юрий Само<br />Киев, ул. Бальзака<br />Киев<br />Киевская область<br />Украина</td>
+                <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;">Юрий Само<br />Киев, ул. Бальзака<br />Киев<br />Киевская область<br />Украина</td>
+              </tr>
+    </tbody>
+  </table>
+  <table style="border-collapse: collapse; width: 100%; border-top: 1px solid #DDDDDD; border-left: 1px solid #DDDDDD; margin-bottom: 20px;">
+    <thead>
+      <tr>
+        <td style="font-size: 12px; border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; background-color: #EFEFEF; font-weight: bold; text-align: left; padding: 7px; color: #222222;">Наименование:</td>
+        <td style="font-size: 12px; border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; background-color: #EFEFEF; font-weight: bold; text-align: left; padding: 7px; color: #222222;">Модель</td>
+        <td style="font-size: 12px; border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; background-color: #EFEFEF; font-weight: bold; text-align: right; padding: 7px; color: #222222;">Количество</td>
+        <td style="font-size: 12px; border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; background-color: #EFEFEF; font-weight: bold; text-align: right; padding: 7px; color: #222222;">Цена</td>
+        <td style="font-size: 12px; border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; background-color: #EFEFEF; font-weight: bold; text-align: right; padding: 7px; color: #222222;">Итого:</td>
+      </tr>
+    </thead>
+    <tbody>
+            <tr>
+        <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;">iPhone          </td>
+        <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;">Товар 11</td>
+        <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;">1</td>
+        <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;">101.00 р.</td>
+        <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;">101.00 р.</td>
+      </tr>
+                </tbody>
+    <tfoot>
+            <tr>
+        <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;" colspan="4"><b>Сумма:</b></td>
+        <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;">101.00 р.</td>
+      </tr>
+            <tr>
+        <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;" colspan="4"><b>Фиксированная стоимость доставки:</b></td>
+        <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;">5.00 р.</td>
+      </tr>
+            <tr>
+        <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;" colspan="4"><b>Итого:</b></td>
+        <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;">106.00 р.</td>
+      </tr>
+          </tfoot>
+  </table>
+  <p style="margin-top: 0px; margin-bottom: 20px;">Если у Вас есть какие-либо вопросы, ответьте на это сообщение.</p>
+  <p style="margin-top: 0px; margin-bottom: 20px;">Работает на <a href="http://myopencart.ru">ocStore</a>.</p>
+</div>
+</body>
+</html>
+
+------=_NextPart_e50097e42dc83fadc107b5e4f9c9d9c0_alt--
+------=_NextPart_e50097e42dc83fadc107b5e4f9c9d9c0--
+
