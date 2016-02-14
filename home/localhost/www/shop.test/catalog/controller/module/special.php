@@ -6,7 +6,6 @@ class ControllerModuleSpecial extends Controller {
       	$this->data['heading_title'] = $this->language->get('heading_title');
 
 		$this->data['button_cart'] = $this->language->get('button_cart');
-		$this->data['button_details'] = $this->language->get('button_details');
 		
 		$this->load->model('catalog/product');
 		
@@ -48,24 +47,15 @@ class ControllerModuleSpecial extends Controller {
 				$rating = false;
 			}
 			
-			if ($result['manufacturer_image'] && file_exists(DIR_IMAGE . $result['manufacturer_image'])) {
-				$m_image = '<img src="' . $this->model_tool_image->resize($result['manufacturer_image'], 75, 36) . '" alt="' . $result['manufacturer'] . '" />';
-			} else {
-				$m_image = '';
-			}
-			
 			$this->data['products'][] = array(
 				'product_id' => $result['product_id'],
 				'thumb'   	 => $image,
 				'name'    	 => $result['name'],
-				'description' => mb_substr(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')), 0, 70) . '..',
-				'manufacturer' => $result['manufacturer'],
-				'manufacturer_image' => $m_image,
 				'price'   	 => $price,
 				'special' 	 => $special,
 				'rating'     => $rating,
 				'reviews'    => sprintf($this->language->get('text_reviews'), (int)$result['reviews']),
-				'href'    	 => $this->url->link('product/product', 'product_id=' . $result['product_id']),
+				'href'    	 => $this->url->link('product/product', 'product_id=' . $result['product_id'])
 			);
 		}
 

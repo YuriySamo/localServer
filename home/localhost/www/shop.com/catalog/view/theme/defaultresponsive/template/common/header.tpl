@@ -80,15 +80,9 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
  
 <div id="topbar">
   <div class="wrapper clearafter">
-  <?php echo $language; ?>
+
   <?php echo $currency; ?>
-   <div id="welcome">
-   <?php if (!$logged) { ?>
-    <?php echo $text_welcome; ?>
-    <?php } else { ?>
-    <?php echo $text_logged; ?>
-    <?php } ?>
-  </div>
+
   <div class="links">
     <a href="<?php echo $wishlist; ?>" id="wishlist-total" class="icon-wishlist"><?php echo $text_wishlist; ?></a>
     <a href="<?php echo $account; ?>" id="link-account" class="icon-user"><?php echo $text_account; ?></a>
@@ -100,12 +94,36 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
 
 
 <div id="toppanel" class="wrapper clearafter">
+
   <?php if ($logo) { ?>
-  <div id="logo"><a href="<?php echo $home; ?>"><img src="<?php echo $logo; ?>" title="<?php echo $name; ?>" alt="<?php echo $name; ?>" /></a></div>
+  <div id="logo">
+	  <a href="<?php echo $home; ?>">
+		<img src="<?php echo $logo; ?>" title="<?php echo $name; ?>" alt="<?php echo $name; ?>" />
+	  </a>
+  </div>
   <?php } ?>
-  <?php echo $cart; ?>
+  <div id="right-block">
+	  <div id="welcome">
+	   <?php if (!$logged) { ?>
+		<?php echo $text_welcome; ?>
+		<?php } else { ?>
+		<?php echo $text_logged; ?>
+		<?php } ?>
+	  </div>
+	  
+	  <?php echo $cart; ?>
+	  
+	  <div id="language-settings">
+		<?php echo $language; ?>
+	  </div>
+	  <div id="phone">
+	  <?php echo "+38(093)1115577" ?> <br/>
+	  <?php echo "+38(093)1115577" ?>
+	  </div>
+  </div>
 
   <div class="clearbreak"></div>
+  
 </div>
 
 

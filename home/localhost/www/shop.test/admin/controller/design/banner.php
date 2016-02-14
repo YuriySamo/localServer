@@ -3,7 +3,7 @@ class ControllerDesignBanner extends Controller {
 	private $error = array();
  
 	public function index() {
-		$this->load->language('design/banner');
+		$this->language->load('design/banner');
 
 		$this->document->setTitle($this->language->get('heading_title'));
 		
@@ -13,7 +13,7 @@ class ControllerDesignBanner extends Controller {
 	}
 
 	public function insert() {
-		$this->load->language('design/banner');
+		$this->language->load('design/banner');
 
 		$this->document->setTitle($this->language->get('heading_title'));
 		
@@ -45,7 +45,7 @@ class ControllerDesignBanner extends Controller {
 	}
 
 	public function update() {
-		$this->load->language('design/banner');
+		$this->language->load('design/banner');
 
 		$this->document->setTitle($this->language->get('heading_title'));
 		
@@ -77,7 +77,7 @@ class ControllerDesignBanner extends Controller {
 	}
  
 	public function delete() {
-		$this->load->language('design/banner');
+		$this->language->load('design/banner');
  
 		$this->document->setTitle($this->language->get('heading_title'));
 		
@@ -110,7 +110,7 @@ class ControllerDesignBanner extends Controller {
 		$this->getList();
 	}
 
-	private function getList() {
+	protected function getList() {
 		if (isset($this->request->get['sort'])) {
 			$sort = $this->request->get['sort'];
 		} else {
@@ -261,7 +261,7 @@ class ControllerDesignBanner extends Controller {
 		$this->response->setOutput($this->render());
 	}
 
-	private function getForm() {
+	protected function getForm() {
 		$this->data['heading_title'] = $this->language->get('heading_title');
 		
 		$this->data['text_enabled'] = $this->language->get('text_enabled');
@@ -281,8 +281,6 @@ class ControllerDesignBanner extends Controller {
 		$this->data['button_cancel'] = $this->language->get('button_cancel');
 		$this->data['button_add_banner'] = $this->language->get('button_add_banner');
 		$this->data['button_remove'] = $this->language->get('button_remove');
-
-		$this->data['token'] = $this->session->data['token'];
 
  		if (isset($this->error['warning'])) {
 			$this->data['error_warning'] = $this->error['warning'];
@@ -342,6 +340,8 @@ class ControllerDesignBanner extends Controller {
 			$banner_info = $this->model_design_banner->getBanner($this->request->get['banner_id']);
 		}
 
+		$this->data['token'] = $this->session->data['token'];
+
 		if (isset($this->request->post['name'])) {
 			$this->data['name'] = $this->request->post['name'];
 		} elseif (!empty($banner_info)) {
@@ -400,7 +400,7 @@ class ControllerDesignBanner extends Controller {
 		$this->response->setOutput($this->render());
 	}
 
-	private function validateForm() {
+	protected function validateForm() {
 		if (!$this->user->hasPermission('modify', 'design/banner')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
@@ -412,7 +412,7 @@ class ControllerDesignBanner extends Controller {
 		if (isset($this->request->post['banner_image'])) {
 			foreach ($this->request->post['banner_image'] as $banner_image_id => $banner_image) {
 				foreach ($banner_image['banner_image_description'] as $language_id => $banner_image_description) {
-					if ((utf8_strlen($banner_image_description['title']) < 2)) {
+					if ((utf8_strlen($banner_image_description['title']) < 2) || (utf8_strlen($banner_image_description['title']) > 64)) {
 						$this->error['banner_image'][$banner_image_id][$language_id] = $this->language->get('error_title'); 
 					}					
 				}
@@ -426,7 +426,7 @@ class ControllerDesignBanner extends Controller {
 		}
 	}
 
-	private function validateDelete() {
+	protected function validateDelete() {
 		if (!$this->user->hasPermission('modify', 'design/banner')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}

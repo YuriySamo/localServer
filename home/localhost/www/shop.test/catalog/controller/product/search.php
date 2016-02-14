@@ -9,24 +9,24 @@ class ControllerProductSearch extends Controller {
 		
 		$this->load->model('tool/image'); 
 		
-		if (isset($this->request->get['filter_name'])) {
-			$filter_name = $this->request->get['filter_name'];
+		if (isset($this->request->get['search'])) {
+			$search = $this->request->get['search'];
 		} else {
-			$filter_name = '';
+			$search = '';
 		} 
 		
-		if (isset($this->request->get['filter_tag'])) {
-			$filter_tag = $this->request->get['filter_tag'];
-		} elseif (isset($this->request->get['filter_name'])) {
-			$filter_tag = $this->request->get['filter_name'];
+		if (isset($this->request->get['tag'])) {
+			$tag = $this->request->get['tag'];
+		} elseif (isset($this->request->get['search'])) {
+			$tag = $this->request->get['search'];
 		} else {
-			$filter_tag = '';
+			$tag = '';
 		} 
 				
-		if (isset($this->request->get['filter_description'])) {
-			$filter_description = $this->request->get['filter_description'];
+		if (isset($this->request->get['description'])) {
+			$description = $this->request->get['description'];
 		} else {
-			$filter_description = '';
+			$description = '';
 		} 
 				
 		if (isset($this->request->get['filter_category_id'])) {
@@ -35,10 +35,10 @@ class ControllerProductSearch extends Controller {
 			$filter_category_id = 0;
 		} 
 		
-		if (isset($this->request->get['filter_sub_category'])) {
-			$filter_sub_category = $this->request->get['filter_sub_category'];
+		if (isset($this->request->get['sub_category'])) {
+			$sub_category = $this->request->get['sub_category'];
 		} else {
-			$filter_sub_category = '';
+			$sub_category = '';
 		} 
 								
 		if (isset($this->request->get['sort'])) {
@@ -65,11 +65,13 @@ class ControllerProductSearch extends Controller {
 			$limit = $this->config->get('config_catalog_limit');
 		}
 		
-		if (isset($this->request->get['keyword'])) {
-			$this->document->setTitle($this->language->get('heading_title') .  ' - ' . $this->request->get['keyword']);
+		if (isset($this->request->get['search'])) {
+			$this->document->setTitle($this->language->get('heading_title') .  ' - ' . $this->request->get['search']);
 		} else {
 			$this->document->setTitle($this->language->get('heading_title'));
 		}
+		
+		$this->document->addScript('catalog/view/javascript/jquery/jquery.total-storage.min.js');
 
 		$this->data['breadcrumbs'] = array();
 
@@ -81,24 +83,24 @@ class ControllerProductSearch extends Controller {
 		
 		$url = '';
 		
-		if (isset($this->request->get['filter_name'])) {
-			$url .= '&filter_name=' . $this->request->get['filter_name'];
+		if (isset($this->request->get['search'])) {
+			$url .= '&search=' . urlencode(html_entity_decode($this->request->get['search'], ENT_QUOTES, 'UTF-8'));
 		}
 		
-		if (isset($this->request->get['filter_tag'])) {
-			$url .= '&filter_tag=' . $this->request->get['filter_tag'];
+		if (isset($this->request->get['tag'])) {
+			$url .= '&tag=' . urlencode(html_entity_decode($this->request->get['tag'], ENT_QUOTES, 'UTF-8'));
 		}
 				
-		if (isset($this->request->get['filter_description'])) {
-			$url .= '&filter_description=' . $this->request->get['filter_description'];
+		if (isset($this->request->get['description'])) {
+			$url .= '&description=' . $this->request->get['description'];
 		}
 				
 		if (isset($this->request->get['filter_category_id'])) {
 			$url .= '&filter_category_id=' . $this->request->get['filter_category_id'];
 		}
 		
-		if (isset($this->request->get['filter_sub_category'])) {
-			$url .= '&filter_sub_category=' . $this->request->get['filter_sub_category'];
+		if (isset($this->request->get['sub_category'])) {
+			$url .= '&sub_category=' . $this->request->get['sub_category'];
 		}
 		
 		if (isset($this->request->get['sort'])) {
@@ -123,7 +125,11 @@ class ControllerProductSearch extends Controller {
       		'separator' => $this->language->get('text_separator')
    		);
 		
-    	$this->data['heading_title'] = $this->language->get('heading_title');
+		if (isset($this->request->get['search'])) {
+    		$this->data['heading_title'] = $this->language->get('heading_title') .  ' - ' . $this->request->get['search'];
+		} else {
+			$this->data['heading_title'] = $this->language->get('heading_title');
+		}
 		
 		$this->data['text_empty'] = $this->language->get('text_empty');
     	$this->data['text_critea'] = $this->language->get('text_critea');
@@ -194,22 +200,23 @@ class ControllerProductSearch extends Controller {
 		
 		$this->data['products'] = array();
 		
-		if (isset($this->request->get['filter_name']) || isset($this->request->get['filter_tag'])) {
+		if (isset($this->request->get['search']) || isset($this->request->get['tag'])) {
 			$data = array(
-				'filter_name'         => $filter_name, 
-				'filter_tag'          => $filter_tag, 
-				'filter_description'  => $filter_description,
+				'filter_name'         => $search, 
+				'filter_tag'          => $tag, 
+				'filter_description'  => $description,
 				'filter_category_id'  => $filter_category_id, 
-				'filter_sub_category' => $filter_sub_category, 
+				'filter_sub_category' => $sub_category, 
 				'sort'                => $sort,
 				'order'               => $order,
 				'start'               => ($page - 1) * $limit,
 				'limit'               => $limit
 			);
 					
-			$product_total = $this->model_catalog_product->getTotalProducts($data);
-								
 			$results = $this->model_catalog_product->getProducts($data);
+			//Вызов метода getFoundProducts должен проводится сразу же после getProducts
+			//только тогда он выдает правильное значения количества товаров
+			$product_total = $this->model_catalog_product->getFoundProducts(); 
 					
 			foreach ($results as $result) {
 				if ($result['image']) {
@@ -246,36 +253,36 @@ class ControllerProductSearch extends Controller {
 					'product_id'  => $result['product_id'],
 					'thumb'       => $image,
 					'name'        => $result['name'],
-					'description' => substr(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')), 0, 400) . '..',
+					'description' => utf8_substr(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')), 0, 300) . '..',
 					'price'       => $price,
 					'special'     => $special,
 					'tax'         => $tax,
 					'rating'      => $result['rating'],
 					'reviews'     => sprintf($this->language->get('text_reviews'), (int)$result['reviews']),
-					'href'        => $this->url->link('product/product', $url . '&product_id=' . $result['product_id'])
+					'href'        => $this->url->link('product/product', 'product_id=' . $result['product_id'] . $url)
 				);
 			}
 					
 			$url = '';
 			
-			if (isset($this->request->get['filter_name'])) {
-				$url .= '&filter_name=' . $this->request->get['filter_name'];
+			if (isset($this->request->get['search'])) {
+				$url .= '&search=' . urlencode(html_entity_decode($this->request->get['search'], ENT_QUOTES, 'UTF-8'));
 			}
 			
-			if (isset($this->request->get['filter_tag'])) {
-				$url .= '&filter_tag=' . $this->request->get['filter_tag'];
+			if (isset($this->request->get['tag'])) {
+				$url .= '&tag=' . urlencode(html_entity_decode($this->request->get['tag'], ENT_QUOTES, 'UTF-8'));
 			}
 					
-			if (isset($this->request->get['filter_description'])) {
-				$url .= '&filter_description=' . $this->request->get['filter_description'];
+			if (isset($this->request->get['description'])) {
+				$url .= '&description=' . $this->request->get['description'];
 			}
 			
 			if (isset($this->request->get['filter_category_id'])) {
 				$url .= '&filter_category_id=' . $this->request->get['filter_category_id'];
 			}
 			
-			if (isset($this->request->get['filter_sub_category'])) {
-				$url .= '&filter_sub_category=' . $this->request->get['filter_sub_category'];
+			if (isset($this->request->get['sub_category'])) {
+				$url .= '&sub_category=' . $this->request->get['sub_category'];
 			}
 					
 			if (isset($this->request->get['limit'])) {
@@ -314,17 +321,19 @@ class ControllerProductSearch extends Controller {
 				'href'  => $this->url->link('product/search', 'sort=p.price&order=DESC' . $url)
 			); 
 			
-			$this->data['sorts'][] = array(
-				'text'  => $this->language->get('text_rating_desc'),
-				'value' => 'rating-DESC',
-				'href'  => $this->url->link('product/search', 'sort=rating&order=DESC' . $url)
-			); 
-			
-			$this->data['sorts'][] = array(
-				'text'  => $this->language->get('text_rating_asc'),
-				'value' => 'rating-ASC',
-				'href'  => $this->url->link('product/search', 'sort=rating&order=ASC' . $url)
-			);
+			if ($this->config->get('config_review_status')) {
+				$this->data['sorts'][] = array(
+					'text'  => $this->language->get('text_rating_desc'),
+					'value' => 'rating-DESC',
+					'href'  => $this->url->link('product/search', 'sort=rating&order=DESC' . $url)
+				); 
+				
+				$this->data['sorts'][] = array(
+					'text'  => $this->language->get('text_rating_asc'),
+					'value' => 'rating-ASC',
+					'href'  => $this->url->link('product/search', 'sort=rating&order=ASC' . $url)
+				);
+			}
 			
 			$this->data['sorts'][] = array(
 				'text'  => $this->language->get('text_model_asc'),
@@ -340,24 +349,24 @@ class ControllerProductSearch extends Controller {
 	
 			$url = '';
 			
-			if (isset($this->request->get['filter_name'])) {
-				$url .= '&filter_name=' . $this->request->get['filter_name'];
+			if (isset($this->request->get['search'])) {
+				$url .= '&search=' . urlencode(html_entity_decode($this->request->get['search'], ENT_QUOTES, 'UTF-8'));
 			}
 			
-			if (isset($this->request->get['filter_tag'])) {
-				$url .= '&filter_tag=' . $this->request->get['filter_tag'];
+			if (isset($this->request->get['tag'])) {
+				$url .= '&tag=' . urlencode(html_entity_decode($this->request->get['tag'], ENT_QUOTES, 'UTF-8'));
 			}
 					
-			if (isset($this->request->get['filter_description'])) {
-				$url .= '&filter_description=' . $this->request->get['filter_description'];
+			if (isset($this->request->get['description'])) {
+				$url .= '&description=' . $this->request->get['description'];
 			}
 			
 			if (isset($this->request->get['filter_category_id'])) {
 				$url .= '&filter_category_id=' . $this->request->get['filter_category_id'];
 			}
 			
-			if (isset($this->request->get['filter_sub_category'])) {
-				$url .= '&filter_sub_category=' . $this->request->get['filter_sub_category'];
+			if (isset($this->request->get['sub_category'])) {
+				$url .= '&sub_category=' . $this->request->get['sub_category'];
 			}
 						
 			if (isset($this->request->get['sort'])) {
@@ -369,57 +378,39 @@ class ControllerProductSearch extends Controller {
 			}
 			
 			$this->data['limits'] = array();
-			
-			$this->data['limits'][] = array(
-				'text'  => $this->config->get('config_catalog_limit'),
-				'value' => $this->config->get('config_catalog_limit'),
-				'href'  => $this->url->link('product/search', $url . '&limit=' . $this->config->get('config_catalog_limit'))
-			);
-						
-			$this->data['limits'][] = array(
-				'text'  => 25,
-				'value' => 25,
-				'href'  => $this->url->link('product/search', $url . '&limit=25')
-			);
-			
-			$this->data['limits'][] = array(
-				'text'  => 50,
-				'value' => 50,
-				'href'  => $this->url->link('product/search', $url . '&limit=50')
-			);
 	
-			$this->data['limits'][] = array(
-				'text'  => 75,
-				'value' => 75,
-				'href'  => $this->url->link('product/search', $url . '&limit=75')
-			);
+			$limits = array_unique(array($this->config->get('config_catalog_limit'), 25, 50, 75, 100));
 			
-			$this->data['limits'][] = array(
-				'text'  => 100,
-				'value' => 100,
-				'href'  => $this->url->link('product/search', $url . '&limit=100')
-			);
+			sort($limits);
+	
+			foreach($limits as $value){
+				$this->data['limits'][] = array(
+					'text'  => $value,
+					'value' => $value,
+					'href'  => $this->url->link('product/search', $url . '&limit=' . $value)
+				);
+			}
 					
 			$url = '';
 	
-			if (isset($this->request->get['filter_name'])) {
-				$url .= '&filter_name=' . $this->request->get['filter_name'];
+			if (isset($this->request->get['search'])) {
+				$url .= '&search=' . urlencode(html_entity_decode($this->request->get['search'], ENT_QUOTES, 'UTF-8'));
 			}
 			
-			if (isset($this->request->get['filter_tag'])) {
-				$url .= '&filter_tag=' . $this->request->get['filter_tag'];
+			if (isset($this->request->get['tag'])) {
+				$url .= '&tag=' . urlencode(html_entity_decode($this->request->get['tag'], ENT_QUOTES, 'UTF-8'));
 			}
 					
-			if (isset($this->request->get['filter_description'])) {
-				$url .= '&filter_description=' . $this->request->get['filter_description'];
+			if (isset($this->request->get['description'])) {
+				$url .= '&description=' . $this->request->get['description'];
 			}
 			
 			if (isset($this->request->get['filter_category_id'])) {
 				$url .= '&filter_category_id=' . $this->request->get['filter_category_id'];
 			}
 			
-			if (isset($this->request->get['filter_sub_category'])) {
-				$url .= '&filter_sub_category=' . $this->request->get['filter_sub_category'];
+			if (isset($this->request->get['sub_category'])) {
+				$url .= '&sub_category=' . $this->request->get['sub_category'];
 			}
 										
 			if (isset($this->request->get['sort'])) {
@@ -444,10 +435,10 @@ class ControllerProductSearch extends Controller {
 			$this->data['pagination'] = $pagination->render();
 		}	
 		
-		$this->data['filter_name'] = $filter_name;
-		$this->data['filter_description'] = $filter_description;
+		$this->data['search'] = $search;
+		$this->data['description'] = $description;
 		$this->data['filter_category_id'] = $filter_category_id;
-		$this->data['filter_sub_category'] = $filter_sub_category;
+		$this->data['sub_category'] = $sub_category;
 				
 		$this->data['sort'] = $sort;
 		$this->data['order'] = $order;

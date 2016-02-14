@@ -1,7 +1,7 @@
 <?php if (count($languages) > 1) { ?>
 	<form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
-		<div id="language" style="left: 285px;width: auto;border: 1px solid;">
-			<img id="lang" src=""/>
+		<div id="language" style="left: 285px;width: auto;"><!--border: 1px solid;-->
+			<img id="lang" src=""/> 
 				<select id="languages" name="languages" onChange="$('input[name=\'language_code\']').attr('value', $('#languages option:selected').val()).submit(); $(this).parent().parent().submit();" style="padding: 2px;
   border: none;background: none;">
 			<?php foreach ($languages as $language) { ?>
