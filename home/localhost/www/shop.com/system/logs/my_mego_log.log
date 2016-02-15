@@ -3094,3 +3094,5 @@
 2016-02-15 14:43:57 - PHP Notice:  Undefined variable: error in Z:\home\localhost\www\shop.com\catalog\view\theme\defaultresponsive\template\common\header.tpl on line 193
 2016-02-15 14:44:02 - PHP Notice:  Undefined variable: error in Z:\home\localhost\www\shop.com\catalog\view\theme\defaultresponsive\template\common\header.tpl on line 193
 2016-02-15 15:03:02 - PHP Notice:  Undefined variable: error in Z:\home\localhost\www\shop.com\catalog\view\theme\defaultresponsive\template\common\header.tpl on line 193
+2016-02-15 16:40:53 - PHP Notice:  Undefined variable: error in Z:\home\localhost\www\shop.com\catalog\view\theme\defaultresponsive\template\common\header.tpl on line 193
+2016-02-15 16:45:20 - PHP Notice:  Undefined variable: error in Z:\home\localhost\www\shop.com\catalog\view\theme\defaultresponsive\template\common\header.tpl on line 193
